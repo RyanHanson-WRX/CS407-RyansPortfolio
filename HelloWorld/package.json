@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.163.0"
+    "@types/three": "^0.163.0",
+    "three": "^0.163.0",
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8"
   },
   "type": "module"
 }
