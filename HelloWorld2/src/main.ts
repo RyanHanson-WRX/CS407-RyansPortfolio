@@ -11,12 +11,15 @@ import {
     TorusKnotGeometry,
     Color,
     Mesh,
-    MeshBasicMaterial,
     PerspectiveCamera,
     Scene,
     WebGLRenderer,
-    DirectionalLight
+    DirectionalLight,
+    BasicShadowMap,
+    MeshStandardMaterial,
+    MeshBasicMaterial
   } from 'three';
+
 
 type ShapeKey = 'Box' | 'Cylinder' | 'Sphere' | 'Dodecahedron' | 'Octahedron' | 'Tetrahedron' | 'Torus' | 'Cone' | 'Icosahedron';
 type Geometry = BoxGeometry | CylinderGeometry | SphereGeometry | DodecahedronGeometry | OctahedronGeometry | TetrahedronGeometry | TorusGeometry | ConeGeometry | IcosahedronGeometry;
@@ -40,11 +43,12 @@ export class ThreeObj
   color: string;
   wireframe: boolean;
   animate: boolean;
+  light: boolean;
   speedY: number;
   speedX: number;
   scene: Scene;
   renderer: WebGLRenderer;
-  material: MeshBasicMaterial;
+  material: MeshStandardMaterial | MeshBasicMaterial;
   geometry: BoxGeometry | CylinderGeometry | SphereGeometry | DodecahedronGeometry | OctahedronGeometry | TetrahedronGeometry | TorusGeometry | ConeGeometry | IcosahedronGeometry | TorusKnotGeometry;
 
   constructor(shape: string, color: string, wireframe: boolean, animate: boolean)
@@ -53,6 +57,7 @@ export class ThreeObj
     this.color = color;
     this.wireframe = wireframe;
     this.animate = animate;
+    this.light = false;
     this.speedY = 0.01;
     this.speedX = 0.02;
     this.scene = new Scene();
@@ -65,8 +70,6 @@ export class ThreeObj
 export function CreateScene(obj: ThreeObj)
 {
   const container = document.querySelector('#scene-container') as HTMLElement;
-
-  // const scene = new Scene();
 
   obj.scene.background = new Color('grey');
 
@@ -84,17 +87,37 @@ export function CreateScene(obj: ThreeObj)
 
   if (obj.wireframe)
   {
-    obj.material = new MeshBasicMaterial({ color: obj.color, wireframe: true });
+    if (obj.light) {
+      obj.material = new MeshStandardMaterial({ color: obj.color, wireframe: true });
+    }
+    else {
+      obj.material = new MeshBasicMaterial({ color: obj.color, wireframe: true });
+    }
   }
   else
   {
-    obj.material = new MeshBasicMaterial({ color: obj.color });
+    if (obj.light) {
+      obj.material = new MeshStandardMaterial({ color: obj.color });
+    }
+    else {
+      obj.material = new MeshBasicMaterial({ color: obj.color });
+    }
   }
-
-
 
   const threeShape = new Mesh(obj.geometry, obj.material);
 
+  if (obj.light)
+  {
+    obj.renderer.shadowMap.enabled = true;
+    obj.renderer.shadowMap.type = BasicShadowMap;
+    const light = new DirectionalLight(0xffffff, 5);
+    light.target.position.set(0, 0, 0);
+    light.castShadow = true;
+    light.position.set(0, 10, 5);
+    threeShape.castShadow = true;
+    threeShape.receiveShadow = true;
+    obj.scene.add(light);
+  }
   obj.scene.add(threeShape);
 
   obj.renderer.setSize(container.clientWidth, container.clientHeight);
@@ -119,5 +142,12 @@ export function CreateScene(obj: ThreeObj)
 
 export function DeleteScene(obj: ThreeObj)
 {
-  obj.scene.remove(obj.scene.children[0]);
+  if (obj.scene.children.length > 1)
+  {
+    obj.scene.remove(obj.scene.children[0], obj.scene.children[1]);
+  }
+  else
+  {
+    obj.scene.remove(obj.scene.children[0]);
+  }
 }
