@@ -14,34 +14,37 @@
   <h1>Assignment 2 - Hello World 2.0</h1>
 
   <div id="scene-container">
-    <button id="animate-btn">Start</button>
-    <button id="wireframe-btn">Wireframe</button>
-    <label for="shape">Shape:</label>
-    <select id="shape-input">
-      <option value="Box" selected="true">Cube</option>
-      <option value="Sphere">Sphere</option>
-      <option value="Torus">Torus</option>
-      <option value="Cone">Cone</option>
-      <option value="Cylinder">Cylinder</option>
-      <option value="Dodecahedron">Dodecahedron</option>
-      <option value="Icosahedron">Icosahedron</option>
-      <option value="Octahedron">Octahedron</option>
-      <option value="Tetrahedron">Tetrahedron</option>
-    </select>
-    <button id="light-input">Light</button>
+    <div id="controls">
+      <button id="animate-btn">Start</button>
+      <button id="wireframe-btn">Wireframe</button>
+      <button id="light-input">Light</button>
+      <label for="shape" id="shape-label">Shape:</label>
+      <select id="shape-input">
+        <option value="Box" selected="true">Cube</option>
+        <option value="Sphere">Sphere</option>
+        <option value="Torus">Torus</option>
+        <option value="Cone">Cone</option>
+        <option value="Cylinder">Cylinder</option>
+        <option value="Dodecahedron">Dodecahedron</option>
+        <option value="Icosahedron">Icosahedron</option>
+        <option value="Octahedron">Octahedron</option>
+        <option value="Tetrahedron">Tetrahedron</option>
+      </select>
+      <label for="speedX" id="speedX">Speed X:</label>
+      <input type="range" id="speed-x-input" name="speedX" min="1" max="10" value="2">
+      <label for="speedY" id="speedY">Speed Y:</label>
+      <input type="range" id="speed-y-input" name="speedY" min="1" max="10" value="1">
+      <label for="color" id="color-label">Color:</label>
+      <input type="color" id="color-input" name="color" value="0x000000">
+    </div>
     <canvas>
 
     </canvas>
-    <label for="speed">Speed X:</label>
-    <input type="range" id="speed-x-input" name="speed" min="1" max="10" value="2">
-    <label for="speed">Speed Y:</label>
-    <input type="range" id="speed-y-input" name="speedY" min="1" max="10" value="1">
-    <label for-="color">Color:</label>
-    <input type="color" id="color-input" name="color" value="0x000000">
   </div>
 </body>
 
 <footer>
-    <p>Created by: Ryan Hanson</p>
+  <p>Created by: Ryan Hanson</p>
 </footer>
+
 </html>

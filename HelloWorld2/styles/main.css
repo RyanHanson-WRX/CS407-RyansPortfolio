@@ -41,3 +41,227 @@ footer {
     padding: 10px;
     text-align: center;
 }
+
+#animate-btn {
+    background-color: #4CAF50;
+    width: 100%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#animate-btn:hover {
+    background-color: #45a049;
+}
+
+#animate-btn.on {
+    background-color: #f44336;
+}
+
+#animate-btn.on:hover {
+    background-color: #da190b;
+}
+
+#wireframe-btn {
+    background-color: #f44336;
+    width: 100%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#wireframe-btn:hover {
+    background-color: #da190b;
+}
+
+#wireframe-btn.on {
+    background-color: #4CAF50;
+}
+
+#wireframe-btn.on:hover {
+    background-color: #45a049;
+}
+
+#shape-input {
+    width: 200px;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+#shape-input:focus {
+    outline: none;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.25);
+}
+
+#shape-input option {
+    padding: 10px;
+}
+
+#shape-label {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#light-input {
+    background-color: #f44336;
+    width: 100%;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#light-input:hover {
+    background-color: #da190b;
+}
+
+#light-input.on {
+    background-color: #4CAF50;
+}
+
+#light-input.on:hover {
+    background-color: #45a049;
+}
+
+#speedX {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#speedY {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#speed-x-input {
+    width: 100%;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#speed-y-input {
+    width: 100%;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#color-label {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#color-input {
+    width: 100%;
+    height: 35px;
+    background-color: #ffffff00;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#scene-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+#scene-container> :first-child {
+    flex: 1;
+}
+
+#scene-container> :nth-child(3) {
+    flex: 1;
+}
+
+#scene-container> :last-child {
+    margin-left: 10px;
+    flex: 2;
+}
+
+#controls {
+    width: 300px;
+    /* Set width */
+    height: 400px;
+    /* Set height to make it square */
+    padding: 20px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Include padding and border in element's total width and height */
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
+    /* Stack the children vertically */
+    justify-content: space-around;
+    /* Distribute the space evenly between the children */
+}
+
+#description {
+    font-size: 1vw;
+    color: #ffffff;
+    margin-right: 0;
+    display: inline-block;
+}
+
+canvas[data-engine="three.js r163"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #000;
+    border-radius: 5px;
+    width: 100%;
+}
+
+canvas {
+    width: 0;
+}
