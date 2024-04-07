@@ -1,4 +1,4 @@
-import { IThreeObj, ThreeObj, CreateScene, DeleteScene } from './main.ts';
+import { IThreeObj, ThreeObj, CreateScene, DeleteScene, AnimateScene, WireframeScene, UpdateColor, UpdateLight } from './main.ts';
 
 const animateBtn = document.querySelector('#animate-btn') as HTMLButtonElement;
 const wireframeBtn = document.querySelector('#wireframe-btn') as HTMLButtonElement;
@@ -21,17 +21,14 @@ shapeInput.addEventListener('input', () => ChangeShape());
 function StartOrStopAnimation() {
 
     if (animateBtn.textContent === 'Start') {
-        DeleteScene(threeObj);
         animateBtn.textContent = 'Stop';
         threeObj.animate = true;
-        CreateScene(threeObj);
+        AnimateScene(threeObj);
         animateBtn.classList.add('on');
     }
     else {
-        DeleteScene(threeObj);
         animateBtn.textContent = 'Start';
         threeObj.animate = false;
-        CreateScene(threeObj);
         animateBtn.classList.remove('on');
     }
 }
@@ -43,16 +40,13 @@ function ToggleWireframe() {
     else {
         wireframeBtn.classList.add('on');
     }
-    DeleteScene(threeObj);
     threeObj.wireframe = !threeObj.wireframe;
-    CreateScene(threeObj);
+    WireframeScene(threeObj);
 }
 
 function ChangeColor() {
-    DeleteScene(threeObj);
-    console.log(colorInput.value);
     threeObj.color = colorInput.value;
-    CreateScene(threeObj);
+    UpdateColor(threeObj);
 }
 
 function ChangeShape() {
@@ -81,7 +75,6 @@ function ChangeLight() {
     else {
         lightInput.classList.add('on');
     }
-    DeleteScene(threeObj);
     threeObj.light = !threeObj.light;
-    CreateScene(threeObj);
+    UpdateLight(threeObj);
 }
