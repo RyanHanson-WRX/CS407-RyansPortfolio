@@ -162,7 +162,6 @@ export function CreateScene(obj: IThreeObj) {
 }
 
 export function DeleteScene(obj: IThreeObj) {
-  const container = document.querySelector('#scene-container') as HTMLElement;
   const description = document.querySelector('.description') as HTMLElement;
   if (obj.scene.children.length > 1) {
     obj.scene.remove(obj.scene.children[0], obj.scene.children[1]);
