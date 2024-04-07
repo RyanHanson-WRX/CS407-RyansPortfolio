@@ -16,9 +16,7 @@ import {
   DirectionalLight,
   BasicShadowMap,
   MeshStandardMaterial,
-  MeshBasicMaterial,
-  Object3D,
-  Object3DEventMap
+  MeshBasicMaterial
 } from 'three';
 
 
@@ -102,30 +100,20 @@ export class ThreeObj implements IThreeObj {
 
 export function CreateScene(obj: IThreeObj) {
   const container = document.querySelector('#scene-container') as HTMLElement;
-
   obj.scene.background = new Color('grey');
-
   const fov = 35;
   const aspect = (container.clientWidth * 0.5) / container.clientHeight;
   const near = 0.1;
   const far = 100;
-
   obj.camera = new PerspectiveCamera(fov, aspect, near, far);
-
   obj.camera.position.set(0, 0, 10);
-
   var shape = obj.shape as ShapeKey;
   obj.geometry = ShapeDict[shape];
-
   SetMaterial(obj);
-
   obj.threeShape = new Mesh(obj.geometry, obj.material);
-
   obj.scene.add(obj.threeShape);
-
   obj.renderer.setSize(container.clientWidth * 0.5, container.clientHeight);
   obj.renderer.setPixelRatio(window.devicePixelRatio);
-
   container.append(obj.renderer.domElement);
   container.append(description);
   obj.renderer.render(obj.scene, obj.camera);
@@ -200,4 +188,13 @@ export function CheckLight(obj: IThreeObj) {
       obj.scene.remove(directionalLight);
     }
   }
+}
+
+export function UpdateShape(obj: IThreeObj) {
+  var newShape = obj.shape as ShapeKey;
+  obj.geometry = ShapeDict[newShape];
+  SetMaterial(obj);
+  obj.threeShape!.geometry = obj.geometry;
+  obj.threeShape!.material = obj.material;
+  obj.renderer.render(obj.scene, obj.camera!);
 }

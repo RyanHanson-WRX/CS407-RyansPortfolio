@@ -2,10 +2,13 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "ESNext",
+        "jsx": "react",
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,
+        "moduleResolution": "node",
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
         "allowImportingTsExtensions": true

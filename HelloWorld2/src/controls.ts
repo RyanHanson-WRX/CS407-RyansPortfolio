@@ -1,4 +1,4 @@
-import { IThreeObj, ThreeObj, CreateScene, DeleteScene, AnimateScene, WireframeScene, UpdateColor, UpdateLight } from './main.ts';
+import { IThreeObj, ThreeObj, CreateScene, DeleteScene, AnimateScene, WireframeScene, UpdateColor, UpdateLight, UpdateShape } from './main.ts';
 
 const animateBtn = document.querySelector('#animate-btn') as HTMLButtonElement;
 const wireframeBtn = document.querySelector('#wireframe-btn') as HTMLButtonElement;
@@ -50,21 +50,16 @@ function ChangeColor() {
 }
 
 function ChangeShape() {
-    DeleteScene(threeObj);
     threeObj.shape = shapeInput.value;
-    CreateScene(threeObj);
+    UpdateShape(threeObj);
 }
 
 function ChangeSpeed(axis: string) {
     if (axis === 'y') {
-        DeleteScene(threeObj);
         threeObj.speedY = parseFloat(speedYInput.value) / 100;
-        CreateScene(threeObj);
     }
     else {
-        DeleteScene(threeObj);
         threeObj.speedX = parseFloat(speedXInput.value) / 100;
-        CreateScene(threeObj);
     }
 }
 
