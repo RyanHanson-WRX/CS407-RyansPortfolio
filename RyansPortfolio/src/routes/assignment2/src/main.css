@@ -212,6 +212,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+    width: 100%;
 }
 
 #scene-container> :first-child {
@@ -246,6 +247,7 @@ footer {
     margin-right: 0;
     display: inline-block;
 }
+
 
 canvas[data-engine="three.js r163"] {
     display: block;

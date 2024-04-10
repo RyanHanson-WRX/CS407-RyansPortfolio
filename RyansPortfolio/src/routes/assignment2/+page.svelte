@@ -37,7 +37,7 @@
     <div id="scene-container">
         <div id="controls">
             <div>
-                <label for="color-picker">Color Picker:</label>
+                <label for="color-picker" id="color-label">Color Picker:</label>
                 <ColorPicker bind:hex on:input={handleChangeColor} />
             </div>
             <button id="animate-btn">Start</button>

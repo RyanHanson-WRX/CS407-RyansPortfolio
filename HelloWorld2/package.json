@@ -19,6 +19,7 @@
     "react-color": "^2.19.3",
     "react-color-palette": "^7.1.0",
     "react-dom": "^18.2.0",
+    "svelte-awesome-color-picker": "^3.0.6",
     "three": "^0.163.0",
     "typescript": "^5.4.4",
     "vite": "^5.2.8"
