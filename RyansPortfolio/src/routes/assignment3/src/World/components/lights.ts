@@ -1,4 +1,5 @@
 import { DirectionalLight, RectAreaLight, AmbientLight, SpotLight, PointLight } from 'three';
+import { int } from 'three/examples/jsm/nodes/Nodes.js';
 
 function createLights() {
   // Create a directional light
@@ -32,7 +33,7 @@ function createRectLight() {
 
 function flickerRectLight(lights: RectAreaLight[]) {
     for (let light of lights) {
-        light.intensity = Math.random() ;
+        light.intensity = Math.random();
     }
 }
 

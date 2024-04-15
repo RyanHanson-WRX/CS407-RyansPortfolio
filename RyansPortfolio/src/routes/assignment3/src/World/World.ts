@@ -8,6 +8,8 @@ import { createCylinder } from './components/cylinder.ts';
 
 import { createRenderer } from './systems/renderer.ts';
 import { Resizer } from './systems/Resizer.ts';
+import { int } from 'three/examples/jsm/nodes/Nodes.js';
+import { update } from 'three/examples/jsm/libs/tween.module.js';
 
 let scene: Scene;
 let camera: PerspectiveCamera;
@@ -16,6 +18,8 @@ let rectLights: RectAreaLight[];
 let flickerLights: boolean = false;
 let cube: any;
 let light: any;
+let rotateLevel: number = 0.09;
+let cylinder: any;
 
 class World {
   constructor(container: HTMLElement) {
@@ -27,7 +31,7 @@ class World {
     cube = createCube();
     const room = createRoom();
     light = createLights();
-    const cylinder = createCylinder();
+    cylinder = createCylinder();
     rectLights = createRectLight();
     for (let rectLight of rectLights) {
       scene.add(rectLight);
@@ -43,15 +47,26 @@ class World {
   }
 }
 
-function animateLightFlicker()
+function animateLightFlicker(intensity: number, lightBool: boolean)
 {
-  flickerLights = !flickerLights;
-  if (!flickerLights)
-    {
-      light.intensity = 8;
-      stopLightFlicker();
-      return;
-    }
+  flickerLights = lightBool;
+  if (!flickerLights) {
+    light.intensity = 8;
+    stopLightFlicker();
+    return;
+  }
+  if (intensity == 0) {
+    rotateLevel = 0.09;
+    light.intensity = 20;
+  }
+  else if (intensity == 1) {
+    rotateLevel = 0.1;
+    light.intensity = 25;
+  }
+  else if (intensity == 2) {
+    rotateLevel = 0.14;
+    light.intensity = 30;
+  }
   animateLights();
   rotateCube();
 }
@@ -62,8 +77,8 @@ function rotateCube()
     return;
   }
   requestAnimationFrame(rotateCube);
-  cube.rotation.y += 0.09;
-  cube.rotation.x += 0.09;
+  cube.rotation.y += rotateLevel;
+  cube.rotation.x += rotateLevel;
   renderer.render(scene, camera);
 }
 
@@ -73,7 +88,6 @@ async function animateLights()
   if (!flickerLights) {
     return;
   }
-  light.intensity = 20;
   setTimeout(() => {
     requestAnimationFrame(animateLights);
   }, 60);
@@ -87,4 +101,23 @@ function stopLightFlicker()
   renderer.render(scene, camera);
 }
 
-export { World, animateLightFlicker };
+function updateIntensity(intensity: number)
+{
+  if (intensity == 0) {
+    rotateLevel = 0.09;
+    light.intensity = 20;
+    renderer.render(scene, camera);
+  }
+  else if (intensity == 1) {
+    rotateLevel = 0.15;
+    light.intensity = 25;
+    renderer.render(scene, camera);
+  }
+  else if (intensity == 2) {
+    rotateLevel = 0.20;
+    light.intensity = 30;
+    renderer.render(scene, camera);
+  }
+}
+
+export { World, animateLightFlicker, updateIntensity };

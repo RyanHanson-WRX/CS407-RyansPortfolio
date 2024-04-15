@@ -27,6 +27,8 @@
     <div id="scene-container">
         <div id="controls">
             <button id="animate-btn">Start</button>
+            <label for="reaction-slider" id="reaction-label">Reaction Level</label>
+            <input type="range" id="reaction-slider" min="0" max="2" step="1" value="0" />
         </div>
         <div id="scene">
 
