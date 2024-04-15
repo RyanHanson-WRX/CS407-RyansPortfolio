@@ -11,8 +11,10 @@ function createCylinder() {
         opacity: 0.5,
         reflectivity: 0.9,
         clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-        transmission: 0.9
+        clearcoatRoughness: 0.5,
+        transmission: 0.9,
+        ior: 1.5,
+        roughness: 0.5,
     });
 
     // create a Mesh containing the geometry and material

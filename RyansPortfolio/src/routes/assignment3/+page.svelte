@@ -24,19 +24,21 @@
 
 <body id="back-color">
     <h1>Assignment 3</h1>
-    <div>
-        <button id="animate-btn">Start</button>
-    </div>
     <div id="scene-container">
+        <div id="controls">
+            <button id="animate-btn">Start</button>
+        </div>
+        <div id="scene">
 
-    </div>
-    <div>
-        <p>The goal of this assignment is to use the World App architecture from Discover three.js book to:</p>
-        <ul>
-            <li>Wrap the three.js scene in a World class that hides its implementation</li>
-            <li>refactor the design into seperate modules for the scene, camera, objects, renderer, lights, ...</li>
-            <li>and that does a little more than the last assignment, in terms of objects and specifcally a lighting effect</li>
-        </ul>
+        </div>
+        <div id="description">
+            <p>The goal of this assignment is to use the World App architecture from Discover three.js book to:</p>
+            <ul>
+                <li>Wrap the three.js scene in a World class that hides its implementation</li>
+                <li>refactor the design into seperate modules for the scene, camera, objects, renderer, lights, ...</li>
+                <li>and that does a little more than the last assignment, in terms of objects and specifcally a lighting effect</li>
+            </ul>
+        </div>
     </div>
 </body>
 

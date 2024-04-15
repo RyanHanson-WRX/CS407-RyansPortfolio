@@ -1,4 +1,4 @@
-import { DirectionalLight, RectAreaLight, AmbientLight, SpotLight } from 'three';
+import { DirectionalLight, RectAreaLight, AmbientLight, SpotLight, PointLight } from 'three';
 
 function createLights() {
   // Create a directional light

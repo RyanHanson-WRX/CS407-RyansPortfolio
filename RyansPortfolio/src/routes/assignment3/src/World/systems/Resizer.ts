@@ -3,7 +3,7 @@ import { WebGLRenderer, PerspectiveCamera } from 'three';
 class Resizer {
     constructor(container: HTMLElement, camera: PerspectiveCamera, renderer: WebGLRenderer) {
       // Set the camera's aspect ratio
-      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.aspect = container.clientWidth  / container.clientHeight;
   
       // update the camera's frustum
       camera.updateProjectionMatrix();

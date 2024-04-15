@@ -74,7 +74,6 @@
                 value="1"
             />
         </div>
-        <canvas> </canvas>
     </div>
 </body>
 

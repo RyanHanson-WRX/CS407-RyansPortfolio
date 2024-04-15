@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, RectAreaLight, Vector3 } from 'three';
+import { Scene, PerspectiveCamera, WebGLRenderer, RectAreaLight } from 'three';
 import { createCamera } from './components/camera.ts';
 import { createCube } from './components/cube.ts';
 import { createLights, createRectLight, flickerRectLight, resetLights } from './components/lights.ts';
@@ -73,7 +73,7 @@ async function animateLights()
   if (!flickerLights) {
     return;
   }
-  light.intensity = 15;
+  light.intensity = 20;
   setTimeout(() => {
     requestAnimationFrame(animateLights);
   }, 60);

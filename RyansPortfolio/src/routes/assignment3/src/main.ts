@@ -3,7 +3,7 @@ import { World, animateLightFlicker } from './World/World.ts';
 
 export function main() {
     // Get a reference to the container element
-    const container = document.querySelector('#scene-container') as HTMLElement;
+    const container = document.querySelector('#scene') as HTMLElement;
     const StartOrStopAnimation = document.querySelector('#animate-btn') as HTMLButtonElement;
 
     StartOrStopAnimation.addEventListener('click', () => {
