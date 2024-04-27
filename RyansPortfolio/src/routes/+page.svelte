@@ -10,23 +10,42 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
+	<div>
+		<h1 style="margin-bottom: 0px; font-weight: bold;">Created By:</h1>
+		<pre style="margin-top: 0px; background-color: rgba(0, 0, 0, 0.89); margin-bottom: 0px; color: red;">
+================= ========    =======  ===============   =======    ========
+\\ . . . . . . .\\ \\ . .\\  // . .// //. . . . . . .\\  \\. . .\\  || . .//
+||. . ._____. . .|| \\ . .\\//. . // // . ._____. . . \\ || . . .\\ ||. . ||
+|| . .||   ||. . ||  \\ . .\/. . // || . .||   ||. . .|| ||. . . .\\|| . .||
+||. . ||   || . .||   \\. . . . //  ||. . ||   || . . || || . . . .\||. . ||
+||. . ||   // . .//    \\. . . //   || . .||   |/. . .|| ||. . |\. .\| . .||
+|| . .||  //  . //      || . .||    ||. . ||_-' . . . || || .  ||\. .\ . .||
+||. . ||_-'\  . ||      || . _||    || . . ______ . . || ||. . ||\\. . . .||
+|| ._-||`' \\-_ -\\     ||_-` ||    ||_-' |//  \\| . .|| ||-_-.|| \\_|-_-.||
+||-_.-||    \\  ` ||    ||    ||    ||    ||    ||_.-'|| ||  `-||  \||-`  ||
+||    ||    ||    ||    ||    ||    ||    ||    ||    || ||    ||   ||    ||
+||    ||    ||    ||    ||    ||    ||    ||    ||    || ||    ||   ||    ||
+||    ||    ||    ||    ||    ||    ||    ||    ||    || ||    ||   ||    ||
+||    ||    ||    ||    ||    ||    ||    ||    ||    || ||    ||   ||    ||
+||    ||    ||    ||    ||    ||    ||    ||    ||    || ||    ||   ||    ||
+\\    ||    \\    ||    \\    //    \\    //    \\    // \\    ||   ||    //
+\====`|     \====`|     \====/      \====/      \====/   \====`|   |`====/
+`---'       `---'       `--'        `--'        `--'     `---'     `---'
+		</pre>
+	</div>
+	<h2> <span style="font-weight: bold; margin-top: 0;">Assignments:</span>	
+		<ul>
+			<li>
+				<a href="/assignment2">Assignment2</a>
+			</li>
+			<li>
+				<a href="/assignment3">Assignment3</a>
+			</li>
+		</ul>
 	</h2>
 
-	<Counter />
 </section>
+
 
 <style>
 	section {

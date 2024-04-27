@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-    <title>Hello World 2</title>
+    <title>Assignment 3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
     <link
