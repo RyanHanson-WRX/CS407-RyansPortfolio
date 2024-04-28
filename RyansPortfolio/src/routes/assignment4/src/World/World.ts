@@ -4,6 +4,7 @@ import { createLights, createAmbientLight } from './components/lights.ts';
 import { createScene } from './components/scene.ts';
 import { createRoad } from './components/road/road.ts';
 import { createCar } from './components/car.ts';
+import { createControls } from './components/controls.ts';
 
 import { createRenderer } from './systems/renderer.ts';
 import { Resizer } from './systems/Resizer.ts';
@@ -16,12 +17,14 @@ let renderer: WebGLRenderer;
 let light: any;
 let loop: any;
 let car: any;
+let camControls: any;
 
 class World {
   constructor(container: HTMLElement) {
     camera = createCamera();
     scene = createScene();
     renderer = createRenderer();
+    camControls = createControls(camera, renderer.domElement);
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
     const road = createRoad();
