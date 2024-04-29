@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer, RectAreaLight } from 'three';
+import { Scene, PerspectiveCamera, WebGLRenderer, Vector3 } from 'three';
 import { createCamera } from './components/camera.ts';
 import { createLights, createAmbientLight } from './components/lights.ts';
 import { createScene } from './components/scene.ts';
@@ -6,10 +6,12 @@ import { createRoad } from './components/road/road.ts';
 import { createCar } from './components/car.ts';
 import { createControls } from './components/controls.ts';
 import { CreateTire } from './components/tires.ts';
+import { addVectors, subVectors } from './systems/vectorUtil.ts';
 
 import { createRenderer } from './systems/renderer.ts';
 import { Resizer } from './systems/Resizer.ts';
 import { Loop } from './systems/Loop.js';
+import { add } from 'three/examples/jsm/nodes/Nodes.js';
 
 
 let scene: Scene;
@@ -33,15 +35,32 @@ class World {
     car = createCar();
     let ambLight = createAmbientLight();
 
+    const rotorVector = new Vector3(0, 0, 5.5);
     const tire1 = CreateTire();
     const tire2 = CreateTire();
     const tire3 = CreateTire();
     const tire4 = CreateTire();
 
-    tire1.position.set(7, 2, 5.5);
-    tire2.position.set(7, 2, -5.5);
-    tire3.position.set(-7, 2, 5.5);
-    tire4.position.set(-7, 2, -5.5);
+    const frontPassTire = addVectors(car.frontAxle, rotorVector);
+    const frontDriverTire = subVectors(car.frontAxle, rotorVector);
+    const rearPassTire = addVectors(car.rearAxle, rotorVector);
+    const rearDriverTire = subVectors(car.rearAxle, rotorVector);
+
+    tire1.position.add(frontPassTire);
+    console.log(tire1.position);
+
+
+    // tire1.position.set(7, 2, 5.5);
+    tire2.position.add(frontDriverTire);
+    console.log(tire2.position);
+
+    tire3.position.add(rearPassTire);
+    console.log(tire3.position);
+
+    tire4.position.add(rearDriverTire);
+    console.log(tire4.position);
+    // tire3.position.set(-7, 2, 5.5);
+    // tire4.position.set(-7, 2, -5.5);
     
     car.add(tire1);
     car.add(tire2);

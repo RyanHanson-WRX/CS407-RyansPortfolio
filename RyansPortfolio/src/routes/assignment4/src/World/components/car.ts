@@ -1,10 +1,14 @@
 import { BoxGeometry, Mesh, MeshStandardMaterial, Group, CylinderGeometry, MeshPhysicalMaterial, Vector2, Vector3, CanvasTexture, TextureLoader, SpriteMaterial, Sprite } from 'three';
 import { degToRad } from 'three/src/math/MathUtils.js';
+import { subVectors, addVectors } from '../systems/vectorUtil';
 
 interface CustomCar extends Group {
     tickRight: (delta: number) => void;
     tickLeft: (delta: number) => void;
     tickExhaust: (delta: number) => void;
+    mainVector: Vector3;
+    rearAxle: Vector3;
+    frontAxle: Vector3;
 }
 
 function createCar() {
@@ -61,9 +65,16 @@ function createCar() {
     const flameMaterial = new SpriteMaterial({ map: flameTexture, color: 0xffffff });
     const flameSprite = new Sprite(flameMaterial);
 
+    // Make vector, calc wheels based off vector
     body.castShadow = true;
     body.receiveShadow = true;
-    body.position.set(0, 3, 0);
+    car.mainVector = new Vector3(0, 3, 0); //new Vector3(-7, 0, 0);
+    car.rearAxle = subVectors(car.mainVector, new Vector3(7, 1, 0));
+    car.frontAxle = addVectors(car.mainVector, new Vector3(7, -1, 0));
+    console.log(car.rearAxle);
+
+    // body.position.set(0, 3, 0);
+    body.position.set(car.mainVector.x, car.mainVector.y, car.mainVector.z);
     cab.castShadow = true;
     cab.receiveShadow = true;
     cab.position.set(-1.5, 7.5, 0);
