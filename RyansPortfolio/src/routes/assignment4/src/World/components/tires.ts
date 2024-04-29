@@ -14,9 +14,9 @@ function CreateTire()
     tire.castShadow = true;
     tire.receiveShadow = true;
 
+    let radiansPerSec = MathUtils.degToRad(45);
     tire.tick = (delta: number) => {
-        tire.rotation.z -= (Math.PI * 4 * delta);
-        // tire.rotateOnAxis((-1 * radiansPerSec * delta));
+        tire.rotateOnAxis(new Vector3(0,0,-1),(radiansPerSec / delta));
     };
     return tire;
 }

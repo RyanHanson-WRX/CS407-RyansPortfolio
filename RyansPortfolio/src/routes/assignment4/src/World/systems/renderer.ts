@@ -1,7 +1,7 @@
 import { WebGLRenderer } from 'three';
 
-function createRenderer() {
-  const renderer = new WebGLRenderer({ antialias: true });
+function createRenderer(canvas: HTMLCanvasElement) {
+  const renderer = new WebGLRenderer({ antialias: true, canvas: canvas });
 
   return renderer;
 }
