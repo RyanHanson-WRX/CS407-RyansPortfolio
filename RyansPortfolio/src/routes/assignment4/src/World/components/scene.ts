@@ -1,9 +1,9 @@
-import { Color, Scene, type FogBase } from 'three';
+import { Scene, TextureLoader } from 'three';
 
 function createScene() {
   const scene = new Scene();
-
-  scene.background = new Color('skyblue');
+  const nightTexture = new TextureLoader().load('src/routes/assignment4/src/World/nightsky.jpeg');
+  scene.background = nightTexture;
 
   return scene;
 }

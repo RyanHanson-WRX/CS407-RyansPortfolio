@@ -47,18 +47,12 @@ class World {
     const rearDriverTire = subVectors(car.rearAxle, rotorVector);
 
     tire1.position.add(frontPassTire);
-    console.log(tire1.position);
-
-
-    // tire1.position.set(7, 2, 5.5);
     tire2.position.add(frontDriverTire);
-    console.log(tire2.position);
-
     tire3.position.add(rearPassTire);
-    console.log(tire3.position);
-
     tire4.position.add(rearDriverTire);
-    console.log(tire4.position);
+    
+    // tire1.position.set(7, 2, 5.5);
+    // tire2.position.set(7, 2, -5.5);
     // tire3.position.set(-7, 2, 5.5);
     // tire4.position.set(-7, 2, -5.5);
     

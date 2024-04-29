@@ -7,7 +7,7 @@
     let canvas: HTMLCanvasElement;
     let fps = 0;
     const width = 800;
-    const height = 600;
+    const height = 400;
     let keys = {
         w: false,
         a: false,
@@ -67,13 +67,7 @@
 
 <body id="back-color">
     <h1>Assignment 4</h1>
-    <div id="">
-        <div>
-
-        </div>
-        <article class="">
-            
-        </article>
+    <div id="scene-container">
         <article id="scene" class="graphics" >
             <code>FPS: {Math.round(fps)}</code>
             <canvas 
@@ -92,8 +86,7 @@
                 <li>Place those child objects relative to the parent using transformations, at least one of which we create manually using vector or matrix algebra</li>
                 <li>Have interactivity that moves both the entire object as well as the children</li>
             </ul>
-            <p>For the axes: X (red), Y (green) and Z (blue)</p>
-            <p>Keyboard controls: WASD (rotates the child objects about their own local origin)  Only works if the canvas element has focus.  Click it if key press doesn't do anything.</p>
+            <p>Keyboard controls: WAD & SpaceBar ('w' rotates tires, 'a/d' rotates the whole car, 'SpaceBar' for some flames) Only works if the canvas element has focus.  Click it if key press doesn't do anything.</p>
         </article>
     </div>
 </body>

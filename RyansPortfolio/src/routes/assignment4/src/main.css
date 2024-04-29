@@ -207,15 +207,10 @@ footer {
 }
 
 #scene-container> :first-child {
-    flex: 1;
-}
-
-#scene-container> :nth-child(2) {
     flex: 4;
 }
 
-#scene-container> :last-child {
-    margin-left: 10px;
+#scene-container> :nth-child(2) {
     flex: 1;
 }
 
