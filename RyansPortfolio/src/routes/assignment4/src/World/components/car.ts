@@ -1,6 +1,7 @@
 import { BoxGeometry, Mesh, MeshStandardMaterial, Group, CylinderGeometry, MeshPhysicalMaterial, Vector2, Vector3, CanvasTexture, TextureLoader, SpriteMaterial, Sprite } from 'three';
 import { degToRad } from 'three/src/math/MathUtils.js';
 import { subVectors, addVectors } from '../systems/vectorUtil';
+import flameTexterPath from './flame.png';
 
 interface CustomCar extends Group {
     tickRight: (delta: number) => void;
@@ -60,7 +61,7 @@ function createCar() {
     const exhaust = new Mesh(exhaustGeometry, exhaustMaterial);
 
     const textureLoader = new TextureLoader();
-    const flameTexture = textureLoader.load('src/routes/assignment4/src/World/components/flame.png'); // replace with your flame texture path
+    const flameTexture = textureLoader.load(flameTexterPath);
 
     const flameMaterial = new SpriteMaterial({ map: flameTexture, color: 0xffffff });
     const flameSprite = new Sprite(flameMaterial);
@@ -71,7 +72,6 @@ function createCar() {
     car.mainVector = new Vector3(0, 3, 0); //new Vector3(-7, 0, 0);
     car.rearAxle = subVectors(car.mainVector, new Vector3(7, 1, 0));
     car.frontAxle = addVectors(car.mainVector, new Vector3(7, -1, 0));
-    console.log(car.rearAxle);
 
     // body.position.set(0, 3, 0);
     body.position.set(car.mainVector.x, car.mainVector.y, car.mainVector.z);

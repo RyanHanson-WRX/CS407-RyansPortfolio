@@ -50,7 +50,7 @@ class World {
     tire2.position.add(frontDriverTire);
     tire3.position.add(rearPassTire);
     tire4.position.add(rearDriverTire);
-    
+
     // tire1.position.set(7, 2, 5.5);
     // tire2.position.set(7, 2, -5.5);
     // tire3.position.set(-7, 2, 5.5);
