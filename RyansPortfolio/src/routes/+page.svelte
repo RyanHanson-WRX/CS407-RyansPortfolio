@@ -1,18 +1,16 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import portfolio_logo from '$lib/images/HomeAscii.png';
 </script>
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Ryan's Portfolio" />
 </svelte:head>
 
 <section>
 	<div>
 		<h1 style="margin-bottom: 0px; font-weight: bold;">Created By:</h1>
-		<pre style="margin-top: 0px; background-color: rgba(0, 0, 0, 0.89); margin-bottom: 0px; color: red;">
+		<!-- <pre style="margin-top: 0px; background-color: rgba(0, 0, 0, 0.89); margin-bottom: 0px; color: red;">
 ================= ========    =======  ===============   ========   ========
 \\ . . . . . . .\\ \\ . .\\  // . .// //. . . . . . .\\  \\. . .\\  || . .//
 ||. . ._____. . .|| \\ . .\\//. . // // . ._____. . . \\ || . . .\\ ||. . ||
@@ -31,7 +29,8 @@
 \\    ||    \\    ||    \\    //    \\    //    \\    // \\    ||   ||    //
 \====`|     \====`|     \====/      \====/      \====/   \====`|   |`====/
 `---'       `---'       `--'        `--'        `--'     `---'     `---'
-		</pre>
+		</pre> -->
+		<img src={portfolio_logo} alt="Portfolio Logo" style="width: 100%; height: auto;"/>
 	</div>
 	<h2> <span style="font-weight: bold; margin-top: 0;">Assignments:</span>	
 		<ul>
@@ -43,6 +42,9 @@
 			</li>
 			<li>
 				<a href="/assignment4">Assignment4</a>
+			</li>
+			<li>
+				<a href="/assignment5">Assignment5</a>
 			</li>
 		</ul>
 	</h2>

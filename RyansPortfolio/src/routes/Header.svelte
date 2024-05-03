@@ -11,7 +11,7 @@
 		</a>
 	</div>
 
-	<nav>
+	<nav data-sveltekit-reload>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
@@ -30,6 +30,9 @@
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/assignment4') ? 'page' : undefined}>
 				<a href="/assignment4">Assignment4</a>
+			</li>
+			<li aria-current={$page.url.pathname.startsWith('/assignment5') ? 'page' : undefined}>
+				<a href="/assignment5">Assignment5</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">

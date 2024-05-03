@@ -1,4 +1,4 @@
-import { type IThreeObj, ThreeObj, CreateScene, AnimateScene, WireframeScene, UpdateColor, UpdateLight, UpdateShape } from './main.ts';
+import { type IThreeObj, ThreeObj, CreateScene, AnimateScene, WireframeScene, UpdateColor, UpdateLight, UpdateShape, DeleteScene } from './main.ts';
 import { colorStore } from './store.ts';
 
 const threeObj: IThreeObj = new ThreeObj("Box", '#000000', false, false);

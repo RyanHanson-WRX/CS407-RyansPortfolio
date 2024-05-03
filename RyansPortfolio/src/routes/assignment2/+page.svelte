@@ -1,7 +1,7 @@
 <script lang="ts">
     import { colorStore } from "./src/store.ts";
     import "./src/main.css";
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
     import ColorPicker from "svelte-awesome-color-picker";
 
     let MyComponent;

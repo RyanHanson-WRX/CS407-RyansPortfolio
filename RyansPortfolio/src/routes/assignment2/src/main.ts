@@ -119,15 +119,19 @@ import {
     obj.renderer.render(obj.scene, obj.camera);
   }
   
-  export function DeleteScene(obj: IThreeObj) {
+  export function DeleteScene(this: any, obj: IThreeObj) {
     const description = document.querySelector('.description') as HTMLElement;
     if (obj.scene.children.length > 1) {
       obj.scene.remove(obj.scene.children[0], obj.scene.children[1]);
       description.remove();
+      this.renderer.dispose();
+      this.scene.dispose();
     }
     else {
       obj.scene.remove(obj.scene.children[0]);
       description.remove();
+      this.renderer.dispose();
+      this.scene.dispose();
     }
   }
   
