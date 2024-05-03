@@ -2,7 +2,6 @@
     import "./src/main.css";
     import { onMount } from "svelte";
     import { World } from "./src/World/World.ts";
-    let MyComponent;
     let world: World;
     let canvas: HTMLCanvasElement;
     let fps = 0;
@@ -16,11 +15,6 @@
     }
     
     onMount(async () => {
-        // const module = await import("./src/main.ts");
-        // MyComponent = module;
-        // if (MyComponent && typeof MyComponent.main === "function") {
-        //     MyComponent.main();
-        // }
         canvas.focus();
         world = new World(canvas);
         world.start();
