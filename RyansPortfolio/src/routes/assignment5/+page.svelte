@@ -7,13 +7,7 @@
     let fps = 0;
     const width = 800;
     const height = 700;
-    let keys = {
-        w: false,
-        a: false,
-        d: false,
-        " ": false
-    }
-    
+
     onMount(async () => {
         canvas.focus();
         world = new World(canvas);
@@ -56,10 +50,6 @@
         }
         world.toggleBloom();
     }
-
-
-
-
 
 </script>
 
