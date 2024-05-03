@@ -6,7 +6,7 @@
     let canvas: HTMLCanvasElement;
     let fps = 0;
     const width = 800;
-    const height = 400;
+    const height = 700;
     let keys = {
         w: false,
         a: false,
@@ -21,27 +21,42 @@
         setInterval(() => {
             fps = world.getFrameRate();
         }, 2000);
-        function animate() {
-            for (let key in keys) {
-                if (keys[key as keyof typeof keys]) {
-                    world.onKeyDown({key} as KeyboardEvent);
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
     });
 
-    function onKeyDown(event: KeyboardEvent) {
-        if (event.key in keys) {
-            keys[event.key as keyof typeof keys] = true;
+    function startOrStop() {
+        const animateBtn = document.getElementById("animate-btn");
+        if (animateBtn!.textContent === "Stop") {
+            world.toggleAnimate();
+            animateBtn!.textContent = "Start";
+            animateBtn!.classList.remove("on");
+        } else {
+            world.toggleAnimate();
+            animateBtn!.textContent = "Stop";
+            animateBtn!.classList.add("on");
         }
     }
-    function onKeyUp(event: KeyboardEvent) {
-        if (event.key in keys) {
-            keys[event.key as keyof typeof keys] = false;
+    function ToggleWireframe() {
+        const wireframeBtn = document.getElementById("wireframe-btn");
+        if (wireframeBtn!.classList.contains("on") === false) {
+            wireframeBtn!.classList.add("on");
+        } else {
+            wireframeBtn!.textContent = "Wireframe";
+            wireframeBtn!.classList.remove("on");
         }
+        world.toggleWireframe();
     }
+
+    function ToggleBloom() {
+        const bloomBtn = document.getElementById("bloom-btn");
+        if (bloomBtn!.classList.contains("on") === false) {
+            bloomBtn!.classList.add("on");
+        } else {
+            bloomBtn!.textContent = "Bloom";
+            bloomBtn!.classList.remove("on");
+        }
+        world.toggleBloom();
+    }
+
 
 
 
@@ -62,13 +77,19 @@
 <body id="back-color">
     <h1>Assignment 5</h1>
     <div id="scene-container">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <article id="controls"> 
+            <h2>Controls</h2>
+            <btn id="animate-btn" on:click={startOrStop}>Start</btn>
+            <btn id="wireframe-btn" on:click={ToggleWireframe}>Wireframe</btn>
+            <btn id="bloom-btn" on:click={ToggleBloom}>Bloom</btn>
+        </article>
         <article id="scene" class="graphics" >
             <code>FPS: {Math.round(fps)}</code>
             <canvas 
             bind:this={canvas}
             tabindex="0"
-            on:keydown={onKeyDown}
-            on:keyup={onKeyUp}
             width={width}
             height={height}></canvas>
 
@@ -103,4 +124,5 @@
     .description {
         flex: 2 200px;
     }
+
 </style>

@@ -34,7 +34,7 @@ footer {
 
 #animate-btn {
     background-color: #4CAF50;
-    width: 100%;
+    width: 50%;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -62,7 +62,7 @@ footer {
 
 #wireframe-btn {
     background-color: #f44336;
-    width: 100%;
+    width: 50%;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -85,6 +85,34 @@ footer {
 }
 
 #wireframe-btn.on:hover {
+    background-color: #45a049;
+}
+
+#bloom-btn {
+    background-color: #f44336;
+    width: 50%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#bloom-btn:hover {
+    background-color: #da190b;
+}
+
+#bloom-btn.on {
+    background-color: #4CAF50;
+}
+
+#bloom-btn.on:hover {
     background-color: #45a049;
 }
 
@@ -207,11 +235,16 @@ footer {
 }
 
 #scene-container> :first-child {
+    flex: 1;
+}
+
+
+#scene-container> :nth-child(2) {
     flex: 4;
 }
 
-#scene-container> :nth-child(2) {
-    flex: 1;
+#scene-container> :last-child {
+    flex: 2;
 }
 
 #controls {

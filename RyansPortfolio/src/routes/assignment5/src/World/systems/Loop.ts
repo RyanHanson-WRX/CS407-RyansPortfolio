@@ -6,15 +6,19 @@ class Loop {
   camera: any;
   scene: any;
   renderer: any;
+  composer: any;
   updatables: any[];
   tires: any[];
   private delta: number = 0;
   private clock = new Clock();
+  public animate: boolean = false;
+  public bloom: boolean = false;
 
-  constructor(camera: any, scene: any, renderer: any) {
+  constructor(camera: any, scene: any, renderer: any, composer: any) {
     this.camera = camera;
     this.scene = scene;
     this.renderer = renderer;
+    this.composer = composer;
     this.updatables = [];
     this.tires = [];
   }
@@ -26,7 +30,11 @@ class Loop {
       this.tick();
 
       // render a frame
-      this.renderer.render(this.scene, this.camera);
+      if (!this.bloom) {
+        this.renderer.render(this.scene, this.camera);
+      } else{
+        this.composer.render();
+      }
     });
   }
 
@@ -42,29 +50,13 @@ class Loop {
     // console.log(
     //   `The last frame rendered in ${delta * 1000} milliseconds`,
     // );
-
-    // for (const object of this.updatables) {
-    //   object.tick(this.delta);
-    // }
-  }
-
-  tickTires() {
-    for (const object of this.tires) {
+    if (this.animate) {
+      for (const object of this.updatables) {
         object.tick(this.delta);
       }
     }
-
-  tickCarLeft() {
-    this.updatables[0].tickLeft(this.delta);
   }
 
-  tickCarRight() {
-    this.updatables[0].tickRight(this.delta);
-  }
-
-  tickExhaust() {
-    this.updatables[0].tickExhaust(this.delta);
-  }
 
   getFrameRate() : number {
     if (this.delta === 0) return 0;

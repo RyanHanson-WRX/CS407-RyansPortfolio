@@ -1,4 +1,4 @@
-import { WebGLRenderer, PerspectiveCamera } from 'three';
+import { WebGLRenderer, WebGLRenderTarget, PerspectiveCamera } from 'three';
 
 const setSize = (container: HTMLElement, camera: PerspectiveCamera, renderer: WebGLRenderer) => {
   camera.aspect = container.clientWidth / container.clientHeight;
@@ -7,6 +7,7 @@ const setSize = (container: HTMLElement, camera: PerspectiveCamera, renderer: We
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 };
+
 
 class Resizer {
   constructor(container: HTMLElement, camera: PerspectiveCamera, renderer: WebGLRenderer) {

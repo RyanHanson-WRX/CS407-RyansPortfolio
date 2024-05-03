@@ -16,5 +16,4 @@ function createAmbientLight() {
 }
 
 
-
 export { createLights, createAmbientLight };
