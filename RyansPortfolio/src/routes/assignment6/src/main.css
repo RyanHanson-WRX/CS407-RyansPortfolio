@@ -1,0 +1,293 @@
+body {
+    /* remove margins and scroll bars */
+    margin: 0;
+    overflow: hidden;
+
+    /* style text */
+    text-align: center;
+    font-size: 12px;
+    font-family: Sans-Serif;
+
+    /* color text */
+    color: #2f2f2f;
+}
+
+h1 {
+    /* position the heading */
+    width: 100%;
+
+    /* make sure that the heading is drawn on top */
+    z-index: 1;
+}
+
+footer {
+    /* position the footer */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    /* style the footer */
+    color: #2f2f2f;
+    padding: 10px;
+    text-align: center;
+}
+
+#animate-btn {
+    background-color: #4CAF50;
+    width: 50%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#animate-btn:hover {
+    background-color: #45a049;
+}
+
+#animate-btn.on {
+    background-color: #f44336;
+}
+
+#animate-btn.on:hover {
+    background-color: #da190b;
+}
+
+#wireframe-btn {
+    background-color: #f44336;
+    width: 50%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#wireframe-btn:hover {
+    background-color: #da190b;
+}
+
+#wireframe-btn.on {
+    background-color: #4CAF50;
+}
+
+#wireframe-btn.on:hover {
+    background-color: #45a049;
+}
+
+#bloom-btn {
+    background-color: #f44336;
+    width: 50%;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#bloom-btn:hover {
+    background-color: #da190b;
+}
+
+#bloom-btn.on {
+    background-color: #4CAF50;
+}
+
+#bloom-btn.on:hover {
+    background-color: #45a049;
+}
+
+#shape-input {
+    width: 200px;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+#shape-input:focus {
+    outline: none;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.25);
+}
+
+#shape-input option {
+    padding: 10px;
+}
+
+#shape-label {
+    font-size: 18px;
+    color: #2f2f2f;
+}
+
+#light-input {
+    background-color: #f44336;
+    width: 100%;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#light-input:hover {
+    background-color: #da190b;
+}
+
+#light-input.on {
+    background-color: #4CAF50;
+}
+
+#light-input.on:hover {
+    background-color: #45a049;
+}
+
+#speedX {
+    font-size: 18px;
+    color: #2f2f2f;
+}
+
+#speedY {
+    font-size: 18px;
+    color: #2f2f2f;
+}
+
+#speed-x-input {
+    width: 100%;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#speed-y-input {
+    width: 100%;
+    height: 35px;
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#reaction-label {
+    font-size: 18px;
+    color: #2f2f2f;
+}
+
+#color-input {
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff00;
+    border: none;
+    padding: 5px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#scene-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+}
+
+#scene-container> :first-child {
+    flex: 1;
+}
+
+
+#scene-container> :nth-child(2) {
+    flex: 4;
+}
+
+#scene-container> :last-child {
+    flex: 2;
+}
+
+#controls {
+    width: 250px;
+    height: max-content;
+    padding: 20px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#description {
+    font-size: 1vw;
+    color: #2f2f2f;
+    margin-right: 0;
+    display: inline-block;
+}
+
+#scene {
+    display: block;
+    height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+
+}
+
+canvas[data-engine="three.js r163"] {
+    display: block;
+    height: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+} 
+/*
+canvas {
+    width: 0;
+} */
