@@ -7,6 +7,13 @@
     let fps = 0;
     const width = 800;
     const height = 700;
+    let isAnimating = false;
+    let keys = {
+        w: false,
+        a: false,
+        d: false,
+        r: false
+    }
 
     onMount(async () => {
         canvas.focus();
@@ -16,6 +23,15 @@
         setInterval(() => {
             fps = world.getFrameRate();
         }, 2000);
+        function animate() {
+            for (let key in keys) {
+                if (keys[key as keyof typeof keys]) {
+                    world.onKeyDown({key} as KeyboardEvent);
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
     });
 
     function startOrStop() {
@@ -39,6 +55,18 @@
             wireframeBtn!.classList.remove("on");
         }
         world.toggleWireframe();
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+        if (event.key in keys) {
+            keys[event.key as keyof typeof keys] = true;
+        }
+    }
+
+    function onKeyUp(event: KeyboardEvent) {
+        if (event.key in keys) {
+            keys[event.key as keyof typeof keys] = false;
+        }
     }
 
     function ToggleBloom() {
@@ -81,6 +109,8 @@
             <canvas 
             bind:this={canvas}
             tabindex="0"
+            on:keydown={onKeyDown}
+            on:keyup={onKeyUp}
             width={width}
             height={height}></canvas>
 

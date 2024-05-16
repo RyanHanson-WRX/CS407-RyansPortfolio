@@ -9,7 +9,6 @@ async function loadRifle() {
 
 
   const rifle = setupModel(rifleData);
-  rifle.position.set(0, 0, 20);
 
   return rifle;
 }

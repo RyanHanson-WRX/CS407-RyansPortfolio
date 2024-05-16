@@ -9,7 +9,6 @@
   import { Resizer } from './systems/Resizer.ts';
   import { Loop } from './systems/Loop.js';
   
-  import { Bayonet } from './components/bayonet.ts';
   import { loadRifle } from '../../../assignment6/src/World/components/fps/rifle.ts';
   
   let scene: Scene;
@@ -21,6 +20,7 @@
   let bloom: any;
   let bayonet: any;
   let wireframe: boolean = false;
+  let isAnimating: boolean = false;
   
   class World {
     constructor(container: HTMLCanvasElement) {
@@ -58,6 +58,7 @@
       camera.add(rifle);
   
       loop.updatables.push(rifle);
+      loop.rifle = rifle;
       scene.add(camera);
     }
   
@@ -89,6 +90,33 @@
     toggleBloom(){
       loop.bloom = !loop.bloom;
     }
+
+    onKeyDown(event: KeyboardEvent) {
+      if (isAnimating) return;
+      if (event.key === 'w') {
+        isAnimating = true;
+        loop.playShoot();
+        setTimeout(() => {
+          isAnimating = false;
+          loop.stopShoot();
+        }, 200);
+      }
+      if (event.key === 'r')
+      {
+        isAnimating = true;
+        loop.playReload();
+        setTimeout(() => {
+          isAnimating = false;
+          loop.stopReload();
+        }, 5500);
+      }
+      // if (event.key === 'd') {
+      //   loop.tickCarRight();
+      // }
+      // if (event.key === ' ') {
+      //   loop.tickExhaust();
+      // }
+  }
   
   }
   

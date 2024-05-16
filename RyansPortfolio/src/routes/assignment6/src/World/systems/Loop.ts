@@ -8,7 +8,7 @@ class Loop {
   renderer: any;
   composer: any;
   updatables: any[];
-  tires: any[];
+  rifle: any;
   private delta: number = 0;
   private clock = new Clock();
   public animate: boolean = false;
@@ -20,7 +20,7 @@ class Loop {
     this.renderer = renderer;
     this.composer = composer;
     this.updatables = [];
-    this.tires = [];
+    this.rifle = [];
   }
 
   start() {
@@ -57,6 +57,23 @@ class Loop {
     }
   }
 
+
+
+  playShoot() {
+    this.rifle.playShoot();
+  }
+
+  playReload() {
+    this.rifle.playReload();
+  }
+
+  stopReload() {
+    this.rifle.stopReload();
+  }
+
+  stopShoot() {
+    this.rifle.stopShoot();
+  }
 
   getFrameRate() : number {
     if (this.delta === 0) return 0;
