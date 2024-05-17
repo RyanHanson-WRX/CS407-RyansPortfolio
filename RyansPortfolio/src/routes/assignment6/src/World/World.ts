@@ -11,8 +11,8 @@
   import { Loop } from './systems/Loop.js';
   
   import { loadRifle } from '../../../assignment6/src/World/components/fps/rifle.ts';
-  import { createFloor} from '../../../assignment6/src/World/components/floor.ts';
   import {createCube } from '../../../assignment6/src/World/components/boxbackground.ts';
+  import { Bullet } from '../../../assignment6/src/World/components/bullet.ts';
   
   let scene: Scene;
   let camera: PerspectiveCamera;
@@ -22,6 +22,7 @@
   let camControls: any;
   let bloom: any;
   let isAnimating: boolean = false;
+  let rifle: any;
   
   class World {
     constructor(container: HTMLCanvasElement) {
@@ -37,7 +38,6 @@
       light = createLights();
       let ambLight = createAmbientLight();
 
-      let floor = createFloor();
       let cube = createCube();
   
       ambLight.position.set(0, 0, 0);
@@ -51,7 +51,7 @@
   
   
     async init() {
-      const rifle = await loadRifle();
+      rifle = await loadRifle();
   
 
       rifle.rotation.z = Math.PI;
@@ -139,6 +139,16 @@
     onMouseDown(event: MouseEvent) {
       if (isAnimating) return;
       if (event.button === 0) {
+        const offset = new Vector3(1, -2, -20); // adjust this offset to match the position of the rifle relative to the camera
+        offset.applyMatrix4(camera.matrixWorld); // apply the camera's world matrix to the offset
+
+        const direction = new Vector3(0, 0, -3); // forward direction in the camera's local space
+        direction.transformDirection(camera.matrixWorld); // convert to world space
+
+        const bulletVec = offset;
+        const bullet = new Bullet(bulletVec, direction, 500);
+        scene.add(bullet);
+        loop.updatables.push(bullet);
         isAnimating = true;
         loop.playShoot();
         setTimeout(() => {

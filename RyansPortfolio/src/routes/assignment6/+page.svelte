@@ -128,13 +128,13 @@
 
         </article>
         <article class="description">
-            <p>The goal of this assignment is to learn how geometries are organized, represented and delivered to OpenGL and the graphics card.</p>  <p>Requirements are:</p>
+            <p>The goal of this assignment is to learn about pre-made models and animations.</p>  <p>Requirements are:</p>
             <ul>
-                <li>Construct a custom geometry object manually by specifying vertices and faces in an indexed buffer geometry.</li>
-                <li>Use per-vertex colors so we can pass custom attribute data to the vertex shader</li>
-                <li>Implement orbit and optionally camera navigation through the scene</li>
+                <li>Load a pre-made model from a <a href="https://github.com/KhronosGroup/glTF">GLTF</a> file, that contains one or more geometries with materials and animation clips.</li>
+                <li>Use the <a href="https://threejs.org/docs/index.html?q=animation#manual/en/introduction/Animation-system">three.js animation system</a></li>
+                <li>Exercise both of these with some form of interactive control.</li>
             </ul>
-            <p>Use the mouse to orbit and pan the camera: left mouse click (hold down) or single finger swipe to orbit, right mouse click (hold down), arrow keys, or two-finger swipe to pan; zoom with the scroll wheel or pinch gesture.</p>
+            <p>Use WASD to move around, Mouse1 to shoot, R to reload</p>
         </article>
     </div>
 </body>

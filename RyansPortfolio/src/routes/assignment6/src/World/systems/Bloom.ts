@@ -7,7 +7,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 function createBloom(canvas: HTMLCanvasElement, scene: Scene, cam: Camera,  renderer: WebGLRenderer, windowWidth: number, windowHeight: number) {
   const renderScene = new RenderPass(scene, cam);
-  const bloomPass = new UnrealBloomPass(new Vector2(windowWidth, windowHeight), 1, 1, 0.09);
+  const bloomPass = new UnrealBloomPass(new Vector2(windowWidth, windowHeight), 1, 1, 0.20);
   const composer = new EffectComposer(renderer);
 
   const fxaaPass = new ShaderPass(FXAAShader);
