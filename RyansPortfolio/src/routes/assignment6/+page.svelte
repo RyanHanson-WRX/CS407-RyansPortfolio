@@ -12,8 +12,11 @@
         w: false,
         a: false,
         d: false,
+        s: false,
         r: false
     }
+
+    let mouseBtn = false;
 
     onMount(async () => {
         canvas.focus();
@@ -24,9 +27,15 @@
             fps = world.getFrameRate();
         }, 2000);
         function animate() {
+            if (mouseBtn) {
+                world.onMouseDown({button: 0} as MouseEvent);
+            }
             for (let key in keys) {
                 if (keys[key as keyof typeof keys]) {
                     world.onKeyDown({key} as KeyboardEvent);
+                }
+                if (keys[key as keyof typeof keys] === false) {
+                    world.onKeyUp({key} as KeyboardEvent);
                 }
             }
             requestAnimationFrame(animate);
@@ -46,16 +55,6 @@
             animateBtn!.classList.add("on");
         }
     }
-    function ToggleWireframe() {
-        const wireframeBtn = document.getElementById("wireframe-btn");
-        if (wireframeBtn!.classList.contains("on") === false) {
-            wireframeBtn!.classList.add("on");
-        } else {
-            wireframeBtn!.textContent = "Wireframe";
-            wireframeBtn!.classList.remove("on");
-        }
-        world.toggleWireframe();
-    }
 
     function onKeyDown(event: KeyboardEvent) {
         if (event.key in keys) {
@@ -63,9 +62,21 @@
         }
     }
 
+    function onMouseDown(event: MouseEvent) {
+        if (event.button == 0) {
+            mouseBtn = true;
+        }
+    }
+
     function onKeyUp(event: KeyboardEvent) {
         if (event.key in keys) {
             keys[event.key as keyof typeof keys] = false;
+        }
+    }
+
+    function onMouseUp(event: MouseEvent) {
+        if (event.button == 0) {
+            mouseBtn = false;
         }
     }
 
@@ -101,7 +112,6 @@
         <article id="controls"> 
             <h2>Controls</h2>
             <btn id="animate-btn" on:click={startOrStop}>Start</btn>
-            <btn id="wireframe-btn" on:click={ToggleWireframe}>Wireframe</btn>
             <btn id="bloom-btn" on:click={ToggleBloom}>Bloom</btn>
         </article>
         <article id="scene" class="graphics" >
@@ -110,7 +120,9 @@
             bind:this={canvas}
             tabindex="0"
             on:keydown={onKeyDown}
+            on:mousedown={onMouseDown}
             on:keyup={onKeyUp}
+            on:mouseup={onMouseUp}
             width={width}
             height={height}></canvas>
 

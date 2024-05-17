@@ -3,6 +3,7 @@
   import { createLights, createAmbientLight } from './components/lights.ts';
   import { createScene } from './components/scene.ts';
   import { Controls } from './systems/Controls.ts';
+  import { PointerControls } from './systems/PointerControls.ts'
   import { createBloom } from './systems/Bloom.ts';
   
   import { createRenderer } from './systems/renderer.ts';
@@ -10,6 +11,8 @@
   import { Loop } from './systems/Loop.js';
   
   import { loadRifle } from '../../../assignment6/src/World/components/fps/rifle.ts';
+  import { createFloor} from '../../../assignment6/src/World/components/floor.ts';
+  import {createCube } from '../../../assignment6/src/World/components/boxbackground.ts';
   
   let scene: Scene;
   let camera: PerspectiveCamera;
@@ -18,8 +21,6 @@
   let loop: any;
   let camControls: any;
   let bloom: any;
-  let bayonet: any;
-  let wireframe: boolean = false;
   let isAnimating: boolean = false;
   
   class World {
@@ -27,21 +28,23 @@
       camera = createCamera();
       scene = createScene();
       renderer = createRenderer(container);
-      camControls = new Controls(camera, renderer.domElement);
+      // camControls = new Controls(camera, renderer.domElement);
+      camControls = new PointerControls(camera, renderer.domElement);
       bloom = createBloom(container, scene, camera, renderer, container.clientWidth, container.clientHeight);
   
       loop = new Loop(camera, scene, renderer, bloom);
   
       light = createLights();
       let ambLight = createAmbientLight();
-      // bayonet = new Bayonet(6);
+
+      let floor = createFloor();
+      let cube = createCube();
   
-      // bayonet.position.set(0, 0, 0);
       ambLight.position.set(0, 0, 0);
   
-      // loop.updatables.push(bayonet);
+      // loop.updatables.push(camControls);
   
-      scene.add(light, ambLight);
+      scene.add(light, ambLight, cube);
       const resizer = new Resizer(container, camera, renderer);
   
     } 
@@ -82,27 +85,49 @@
       loop.animate = !loop.animate;
     }
   
-    toggleWireframe(){
-      bayonet.setWireframe(!wireframe);
-      wireframe = !wireframe;
-    }
-  
     toggleBloom(){
       loop.bloom = !loop.bloom;
     }
 
-    onKeyDown(event: KeyboardEvent) {
-      if (isAnimating) return;
+    onKeyUp(event: KeyboardEvent) {
       if (event.key === 'w') {
-        isAnimating = true;
-        loop.playShoot();
-        setTimeout(() => {
-          isAnimating = false;
-          loop.stopShoot();
-        }, 200);
+        camControls.moveForward = false;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 'a') {
+        camControls.moveLeft = false;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 'd') {
+        camControls.moveRight = false;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 's') {
+        camControls.moveBackward = false;
+        camControls.update(loop.delta);
+      }
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'w') {
+        camControls.moveForward = true;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 'a') {
+        camControls.moveLeft = true;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 'd') {
+        camControls.moveRight = true;
+        camControls.update(loop.delta);
+      }
+      if (event.key === 's') {
+        camControls.moveBackward = true;
+        camControls.update(loop.delta);
       }
       if (event.key === 'r')
       {
+        if (isAnimating) return;
         isAnimating = true;
         loop.playReload();
         setTimeout(() => {
@@ -110,13 +135,18 @@
           loop.stopReload();
         }, 5500);
       }
-      // if (event.key === 'd') {
-      //   loop.tickCarRight();
-      // }
-      // if (event.key === ' ') {
-      //   loop.tickExhaust();
-      // }
   }
+    onMouseDown(event: MouseEvent) {
+      if (isAnimating) return;
+      if (event.button === 0) {
+        isAnimating = true;
+        loop.playShoot();
+        setTimeout(() => {
+          isAnimating = false;
+          loop.stopShoot();
+        }, 200);
+      }
+    }
   
   }
   

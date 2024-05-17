@@ -57,7 +57,22 @@ class Loop {
     }
   }
 
+  tickCamForward() {
+    this.updatables[0].moveForward = true;
+    this.updatables[0].update(this.delta);
+  }
 
+  tickCamBack() {
+    this.updatables[0].tickBackward(this.delta);
+  }
+
+  tickCamLeft() {
+    this.updatables[0].tickLeft(this.delta);
+  }
+
+  tickCamRight() {
+    this.updatables[0].tickRight(this.delta);
+  }
 
   playShoot() {
     this.rifle.playShoot();
