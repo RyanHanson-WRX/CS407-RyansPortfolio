@@ -22,8 +22,13 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@codemirror/lang-javascript": "^6.2.2",
+		"@codemirror/theme-one-dark": "^6.1.2",
+		"@types/codemirror": "^5.60.15",
 		"@types/three": "^0.163.0",
 		"svelte-awesome-color-picker": "^3.0.6",
+		"svelte-codemirror": "^1.2.1",
+		"svelte-codemirror-editor": "^1.4.0",
 		"three": "^0.163.0"
 	}
 }
