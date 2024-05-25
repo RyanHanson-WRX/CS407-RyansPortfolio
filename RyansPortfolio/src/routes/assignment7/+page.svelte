@@ -53,7 +53,6 @@ void main() {
     newPosition.y += yOffset;
     S[0][0] = 1.0 - scaleFactor*cos(2.0*theta);
     if ((minY) <= 0.0) {
-      S[1][1] = abs(sin(time)) * abs(0.5 - position.y * 0.5);
         if (worldPos.y >= 2.0)
         {
           S[1][1] = 1.0;
