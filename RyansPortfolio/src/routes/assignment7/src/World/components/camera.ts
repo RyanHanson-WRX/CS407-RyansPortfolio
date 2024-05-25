@@ -8,7 +8,7 @@ function createCamera() {
     500, // far clipping plane
   );
 
-  camera.position.set(20, 4, 20);
+  camera.position.set(50, 25, 50);
   camera.lookAt(0, 0, 0);
 
   return camera;

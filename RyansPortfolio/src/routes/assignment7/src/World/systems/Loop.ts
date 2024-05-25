@@ -54,9 +54,7 @@ class Loop {
       }
 
     // update the minY uniform with the minimum y-coordinate
-      console.log("Entered setting minY");
       this.sphere.material.uniforms.minY.value = minY;
-      console.log("minY: " + this.sphere.material.uniforms.minY);
 
     for (const object of this.updatables) {
       object.tick(this.delta);

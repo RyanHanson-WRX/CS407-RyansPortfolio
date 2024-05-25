@@ -6,7 +6,7 @@ export class Sphere extends Mesh implements Animateable {
     private mainMaterial: ShaderMaterial;
 
     constructor(radius: number = 1.0) {
-        const geometry = new SphereGeometry(radius, 32, 32);
+        const geometry = new SphereGeometry(radius, 64, 64);
         const material = new ShaderMaterial({
             uniforms: {
                 objColor: { value: new Vector3(1.0, 0.0, 0.0) },

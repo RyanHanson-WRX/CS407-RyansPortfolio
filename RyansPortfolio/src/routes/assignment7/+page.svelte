@@ -53,13 +53,14 @@ void main() {
     newPosition.y += yOffset;
     S[0][0] = 1.0 - scaleFactor*cos(2.0*theta);
     if ((minY) <= 0.0) {
+        float squishFactor = abs(sin(time));
         if (worldPos.y >= 2.0)
         {
-          S[1][1] = 1.0;
+          S[1][1] = clamp(squishFactor, 0.0, 1.0) * abs(2.0 + position.y * 0.5);
         }
         else
         {
-          S[1][1] = abs(sin(time)) * abs(2.0 - position.y * 0.5);
+          S[1][1] = clamp(squishFactor, 0.0, 1.0) * abs(2.0 - position.y * 0.5);
         }
     } else {
         S[1][1] = 1.0;
