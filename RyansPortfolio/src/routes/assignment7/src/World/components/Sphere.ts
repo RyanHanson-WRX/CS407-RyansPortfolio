@@ -10,7 +10,7 @@ export class Sphere extends Mesh implements Animateable {
         const material = new ShaderMaterial({
             uniforms: {
                 objColor: { value: new Vector3(1.0, 0.0, 0.0) },
-                xValue: { value: 0.0 },
+                xValue: { value: 1.0 },
                 yValue: { value: 0.0 },
                 zValue: { value: 0.0 },
                 time: { value: 0.0 },

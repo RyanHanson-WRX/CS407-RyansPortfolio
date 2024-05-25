@@ -37,7 +37,11 @@ uniform float time;
 uniform vec3 worldPosition; // new uniform for the world position
 uniform float yOffset;
 uniform float minY;
+uniform float xValue;
+uniform float yValue;
+uniform float zValue;
 out float theta;
+out vec3 wsNormal;
 
 void main() {
     theta = atan(position.y,position.x);
@@ -63,18 +67,38 @@ void main() {
     }
     S[2][2] = 1.0 - scaleFactor*sin(2.0*phi);
     S[3][3] = 1.0;
+    vec4 wsn = modelMatrix * vec4(normal, 0.0);
+    wsNormal = wsn.xyz;
     gl_Position = projectionMatrix * modelViewMatrix * S * vec4(position, 1.0);
 }`;
-    let valueFrag = `
+    let valueFrag = `uniform vec3 objColor;
+
+in vec3 wsNormal;
+uniform float xValue;
+uniform float yValue;
+uniform float zValue;
+
+
+// normally would be uniforms
+// Ambient
+vec3 ia = vec3(0.9,0.9,0.6) * 0.5;
+vec3 ka = vec3(1.0,1.0,1.0);
+// Diffuse
+vec3 id = vec3(1.0,1.0,1.0) * 0.9;
+vec3 kd = vec3(1.0,1.0,1.0);
+// use the same color for both ambient and diffuse
+
 void main() {
-    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
-}
-
-
-
-
-
-`;
+    vec3 ca = objColor;
+    vec3 cd = ca;
+    vec3 wsLight = vec3(xValue,yValue,zValue);  // this is in world coordinates
+    vec3 wsNormalizedNormal = normalize(wsNormal);
+    vec3 wsNormalizedLight = normalize(wsLight);
+    vec3 ambient = ia * ka * ca;
+    vec3 diffuse = id * kd * ca * max(dot(wsNormalizedNormal,wsNormalizedLight),0.0);
+    vec3 color = ambient + diffuse;
+    gl_FragColor = vec4( color, 1.0 );
+}`;
     $: editorHeightV = calculateEditorHeight(valueVertex);
     $: editorHeightF = calculateEditorHeight(valueFrag);
 
