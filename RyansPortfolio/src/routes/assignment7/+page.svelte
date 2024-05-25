@@ -77,6 +77,8 @@ in vec3 wsNormal;
 uniform float xValue;
 uniform float yValue;
 uniform float zValue;
+uniform vec3 rippleOrigin;
+uniform float rippleTime;
 
 
 // normally would be uniforms
@@ -88,16 +90,45 @@ vec3 id = vec3(1.0,1.0,1.0) * 0.9;
 vec3 kd = vec3(1.0,1.0,1.0);
 // use the same color for both ambient and diffuse
 
+vec3 hue2rgb(float hue) {
+    float r = abs(hue * 6.0 - 3.0) - 1.0;
+    float g = 2.0 - abs(hue * 6.0 - 2.0);
+    float b = 2.0 - abs(hue * 6.0 - 4.0);
+    return clamp(vec3(r,g,b), 0.0, 1.0);
+}
+
 void main() {
-    vec3 ca = objColor;
-    vec3 cd = ca;
-    vec3 wsLight = vec3(xValue,yValue,zValue);  // this is in world coordinates
-    vec3 wsNormalizedNormal = normalize(wsNormal);
-    vec3 wsNormalizedLight = normalize(wsLight);
-    vec3 ambient = ia * ka * ca;
-    vec3 diffuse = id * kd * ca * max(dot(wsNormalizedNormal,wsNormalizedLight),0.0);
-    vec3 color = ambient + diffuse;
-    gl_FragColor = vec4( color, 1.0 );
+    float rippleDistance = distance(gl_FragCoord.xyz, rippleOrigin);
+    float rippleEffect = sin(rippleDistance * 0.001 / (rippleTime));
+    float hue = rippleEffect * 0.1 + 0.5;
+    if (rippleTime <= 0.35)
+    {
+      vec3 rainbowColor = hue2rgb(hue);
+      vec3 newColor = objColor + rainbowColor;
+      vec3 ca = newColor;
+      vec3 cd = ca;
+      vec3 wsLight = vec3(xValue,yValue,zValue);  // this is in world coordinates
+      vec3 wsNormalizedNormal = normalize(wsNormal);
+      vec3 wsNormalizedLight = normalize(wsLight);
+      vec3 ambient = ia * ka * ca;
+      vec3 diffuse = id * kd * ca * max(dot(wsNormalizedNormal,wsNormalizedLight),0.0);
+    
+      vec3 color = ambient + diffuse;
+      gl_FragColor = vec4( color, 1.0 );
+    }
+    else
+    {
+      vec3 ca = objColor;
+      vec3 cd = ca;
+      vec3 wsLight = vec3(xValue,yValue,zValue);  // this is in world coordinates
+      vec3 wsNormalizedNormal = normalize(wsNormal);
+      vec3 wsNormalizedLight = normalize(wsLight);
+      vec3 ambient = ia * ka * ca;
+      vec3 diffuse = id * kd * ca * max(dot(wsNormalizedNormal,wsNormalizedLight),0.0);
+    
+      vec3 color = ambient + diffuse;
+      gl_FragColor = vec4( color, 1.0 );
+    }
 }`;
     $: editorHeightV = calculateEditorHeight(valueVertex);
     $: editorHeightF = calculateEditorHeight(valueFrag);

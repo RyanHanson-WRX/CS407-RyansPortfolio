@@ -46,15 +46,25 @@ class Loop {
 
     // calculate the minimum y-coordinate of all vertices
     let minY = Infinity;
+    this.sphere.material.uniforms.rippleTime.value += this.delta;
       const positions = this.sphere.geometry.attributes.position.array;
       for (let i = 0; i < positions.length; i += 3) {
           const vertex = new Vector3(positions[i], positions[i + 1], positions[i + 2]);
           const worldPos = this.sphere.localToWorld(vertex);
           minY = Math.min(minY, worldPos.y);
+          if (minY <= 0)
+          {
+            this.sphere.material.uniforms.rippleOrigin.value = new Vector3(worldPos.x, worldPos.y, worldPos.z);
+            this.sphere.material.uniforms.rippleTime.value = 0.0;
+          }
       }
 
     // update the minY uniform with the minimum y-coordinate
-      this.sphere.material.uniforms.minY.value = minY;
+    this.sphere.material.uniforms.minY.value = minY;
+    if (minY <= 0)
+    {
+
+    }
 
     for (const object of this.updatables) {
       object.tick(this.delta);
