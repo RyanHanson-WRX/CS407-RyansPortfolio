@@ -79,6 +79,22 @@
       sphere.setWireframe(!wireframe);
       wireframe = !wireframe;
     }
+
+    setColor(hexValue : string)
+    {
+        // convert hex color to RGB triplet in a vec3
+        const r = parseInt(hexValue.substring(1, 3), 16) / 255.0;
+        const g = parseInt(hexValue.substring(3, 5), 16) / 255.0;
+        const b = parseInt(hexValue.substring(5, 7), 16) / 255.0;
+        sphere.updateUniform('objColor', new Vector3(r, g, b));
+    }
+
+    updateLight(x: number, y: number, z: number) {
+      sphere.updateUniform('xValue', x);
+      sphere.updateUniform('yValue', y);
+      sphere.updateUniform('zValue', z);
+    }
+
   
   }
   

@@ -5,12 +5,16 @@
     import { javascript } from "../../../node_modules/@codemirror/lang-javascript";
     import { oneDark } from "@codemirror/theme-one-dark";
 	import CodeMirror from 'svelte-codemirror-editor';
-    import { text } from "@sveltejs/kit";
+    import ColorPicker from 'svelte-awesome-color-picker';
     let world: World;
     let canvas: HTMLCanvasElement;
     let fps = 0;
     const width = 800;
     const height = 700;
+    let hex = '#ff0000';
+    let x_light = 1;
+    let y_light = 0;
+    let z_light = 0;
 
     onMount(async () => {
         world = new World(canvas);
@@ -31,10 +35,31 @@
         world.toggleWireframe();
     }
 
+    // Update color of the torus
+    function updateColor() {
+    //console.log('updateColor: hex = ' + hex);
+    // For some reason, the first time this is called, hex is missing the leading '#'
+    let newColor : string = hex;
+    if(newColor.startsWith('#') == false) {
+        newColor = '#' + newColor;
+    }
+    // Also, threejs doesn't take alpha values so truncate to 7 characters
+    newColor = hex.substring(0, 7); // still not understanding something as this isn't working, will just disable alpha for now
+    world.setColor(newColor);
+    world.render();
+    canvas.focus();
+    }
+
+    function updateLight() {
+        world.updateLight(x_light, y_light, z_light);
+        world.render();
+        canvas.focus();
+    }
+
     let valueVertex = `#define M_2PI 6.283185307179586
 #define MAGNITUDE 0.07
 uniform float time;
-uniform vec3 worldPosition; // new uniform for the world position
+uniform vec3 worldPosition;
 uniform float yOffset;
 uniform float minY;
 uniform float xValue;
@@ -77,13 +102,14 @@ in vec3 wsNormal;
 uniform float xValue;
 uniform float yValue;
 uniform float zValue;
+uniform float time;
 uniform vec3 rippleOrigin;
 uniform float rippleTime;
 
 
 // normally would be uniforms
 // Ambient
-vec3 ia = vec3(0.9,0.9,0.6) * 0.5;
+vec3 ia = vec3(0.9,0.9,0.3) * 0.5;
 vec3 ka = vec3(1.0,1.0,1.0);
 // Diffuse
 vec3 id = vec3(1.0,1.0,1.0) * 0.9;
@@ -99,8 +125,9 @@ vec3 hue2rgb(float hue) {
 
 void main() {
     float rippleDistance = distance(gl_FragCoord.xyz, rippleOrigin);
-    float rippleEffect = sin(rippleDistance * 0.001 / (rippleTime));
-    float hue = rippleEffect * 0.1 + 0.5;
+    float rippleEffect = sin(rippleDistance * 0.01 / (rippleTime));
+    float hue =  pow(rippleEffect, time) * 0.001;
+    hue = fract(hue);
     if (rippleTime <= 0.35)
     {
       vec3 rainbowColor = hue2rgb(hue);
@@ -200,6 +227,17 @@ function compileShaders() {
         <article id="controls"> 
             <h2>Controls</h2>
             <btn id="wireframe-btn" on:click={toggleWireframe}>Wireframe</btn>
+            <label for="x-slider" id="x-label">Light - X Axis:</label>
+            <input type="range" id="x-slider" min="0" max="1" step="0.01" bind:value={x_light} on:change={updateLight}/>
+            <label for="y-slider" id="y-label">Light - Y Axis:</label>
+            <input type="range" id="y-slider" min="0" max="1" step="0.01" bind:value={y_light} on:change={updateLight}/>
+            <label for="z-slider" id="z-label">Light - Z Axis:</label>
+            <input type="range" id="z-slider" min="0" max="1" step="0.01" bind:value={z_light} on:change={updateLight}/>
+            <ColorPicker 
+            bind:hex 
+            on:input={updateColor}
+            isAlpha={false}
+        />
         </article>
         <article id="scene" class="graphics" >
             <code>FPS: {Math.round(fps)}</code>

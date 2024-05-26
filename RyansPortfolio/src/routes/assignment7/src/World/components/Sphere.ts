@@ -9,7 +9,7 @@ export class Sphere extends Mesh implements Animateable {
         const geometry = new SphereGeometry(radius, 64, 64);
         const material = new ShaderMaterial({
             uniforms: {
-                objColor: { value: new Vector3(0.0, 1.0, 0.0) },
+                objColor: { value: new Vector3(1.0, 0.0, 0.0) },
                 xValue: { value: 1.0 },
                 yValue: { value: 0.0 },
                 zValue: { value: 0.0 },
@@ -45,16 +45,6 @@ export class Sphere extends Mesh implements Animateable {
         this.mainMaterial.uniforms.time.value += delta;
         this.mainMaterial.uniformsNeedUpdate = true;
     }
-
-    setColor(hexValue: string) {
-        //this.mainMaterial.color.set(hexValue);
-    }
-
-    getColor(): string {
-        //return this.mainMaterial.color.getHexString();
-        return '';
-    }
-    
     
     setWireframe(value: boolean) {
         this.mainMaterial.wireframe = value;
