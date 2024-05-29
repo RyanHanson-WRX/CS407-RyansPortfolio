@@ -24,6 +24,7 @@
 
 <body id="back-color">
     <h1>Assignment 3</h1>
+    <p>*Note: Sometimes scene won't load until you press "Start"*</p>
     <div id="scene-container">
         <div id="controls">
             <button id="animate-btn">Start</button>
