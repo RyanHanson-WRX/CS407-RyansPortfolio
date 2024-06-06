@@ -86,10 +86,10 @@
       loadedFont = await LoadFont();
       p1Score = await CreateText("0");
       p1Score.rotation.x = -Math.PI / 2;
-      p1Score.position.set(-16, 2, -4);
+      p1Score.position.set(-16, 0.5, -4);
       p2Score = await CreateText("0"); 
       p2Score.rotation.x = -Math.PI / 2;
-      p2Score.position.set(10, 2, -4);
+      p2Score.position.set(10, 0.5, -4);
       scene.add(p1Score, p2Score);
     }
 
@@ -103,22 +103,12 @@
         font: loadedFont,
         size: 7,
         depth: 0,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 0,
-        bevelSize: 0.5,
-        bevelOffset: 0,
-        bevelSegments: 0});
+        curveSegments: 12});
       const geometry2 = new TextGeometry(score2.toString(), {
         font: loadedFont,
         size: 7,
         depth: 0,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 0,
-        bevelSize: 0.5,
-        bevelOffset: 0,
-        bevelSegments: 0});
+        curveSegments: 12});
   
       // Replace the old geometries in the meshes
       p1Score.geometry.dispose();

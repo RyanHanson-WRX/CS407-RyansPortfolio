@@ -1,4 +1,5 @@
 import { Clock, Vector3, Box3, Box3Helper } from 'three';
+import { materialOpacity } from 'three/examples/jsm/nodes/Nodes.js';
 
 const clock = new Clock();
 
@@ -92,12 +93,12 @@ class Loop {
     // const paddle1BoxHelper = new Box3Helper(paddle1Box, 0xff0000); // red
     // const paddle2BoxHelper = new Box3Helper(paddle2Box, 0x00ff00); // green
 
-  //   this.scene.add(ballBoxHelper, paddle1BoxHelper, paddle2BoxHelper);
+  //   this.scene.add(ballBoxHelper);
   //   setTimeout(() => {
   //     this.scene.remove(ballBoxHelper);
-  //     this.scene.remove(paddle1BoxHelper);
-  //     this.scene.remove(paddle2BoxHelper);
-  // }, 200);
+  //     // this.scene.remove(paddle1BoxHelper);
+  //     // this.scene.remove(paddle2BoxHelper);
+  // }, 100);
 
     // Check for collisions with each wall
     if (ballBox.intersectsBox(leftWallBox) || this.ball.position.x < -25.5) {

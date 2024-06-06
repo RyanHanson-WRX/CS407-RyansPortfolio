@@ -13,12 +13,7 @@ function CreateText(content: string): Promise<Mesh>{
                 font: loadedFont,
                 size: 7,
                 depth: 0,
-                curveSegments: 12,
-                bevelEnabled: true,
-                bevelThickness: 0,
-                bevelSize: 0.5,
-                bevelOffset: 0,
-                bevelSegments: 0
+                curveSegments: 12
             });
             const material = new MeshBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true});
             text = new Mesh(geometry, material);
