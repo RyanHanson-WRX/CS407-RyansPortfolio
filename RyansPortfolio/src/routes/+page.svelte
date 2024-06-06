@@ -52,6 +52,9 @@
 			<li>
 				<a href="/assignment7">Assignment7</a>
 			</li>
+			<li>
+				<a href="/final">Final</a>
+			</li>
 		</ul>
 	</h2>
 
