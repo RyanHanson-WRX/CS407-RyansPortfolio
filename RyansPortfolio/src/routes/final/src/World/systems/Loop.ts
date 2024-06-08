@@ -132,22 +132,27 @@ class Loop {
         return;
     }
 
-    if (ballBox.intersectsBox(topWallBox)) {
-        this.ball.velocity.z = -this.ball.velocity.z;
+    if (ballBox.intersectsBox(topWallBox) || this.ball.position.z < -11.75) {
+        this.ball.position.z = -11.5;
+        if (this.ball.velocity.z < 0){
+          this.ball.velocity.z = -this.ball.velocity.z;
+        }
+        // this.ball.velocity.z = -this.ball.velocity.z;
     }
-    if (ballBox.intersectsBox(bottomWallBox)) {
-        this.ball.velocity.z = -this.ball.velocity.z;
+    if (ballBox.intersectsBox(bottomWallBox) || this.ball.position.z > 11.75) {
+        this.ball.position.z = 11.5;
+        if (this.ball.velocity.z > 0){
+          this.ball.velocity.z = -this.ball.velocity.z;
+        }
     }
-    if (this.ball.position.z < -11.75) {
-        this.ball.position.z = -11.75;
-        this.ball.velocity.z = -this.ball.velocity.z;
-        return;
-    }
-    if (this.ball.position.z > 11.75) {
-        this.ball.position.z = 11.75;
-        this.ball.velocity.z = -this.ball.velocity.z;
-        return;
-    }
+    // if (this.ball.position.z < -11.75) {
+    //     this.ball.position.z = -11.75;
+    //     this.ball.velocity.z = -this.ball.velocity.z;
+    // }
+    // if (this.ball.position.z > 11.75) {
+    //     this.ball.position.z = 11.75;
+    //     this.ball.velocity.z = -this.ball.velocity.z;
+    // }
 
     if (ballBox.intersectsBox(paddle1Box)) {
         const relativeIntersectionZ = (this.ball.position.z - this.paddle1.position.z);
