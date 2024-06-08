@@ -15,7 +15,7 @@ function CreateText(content: string): Promise<Mesh>{
                 depth: 0,
                 curveSegments: 12
             });
-            const material = new MeshBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true});
+            const material = new MeshBasicMaterial({ color: 0xffffff, opacity: 0.4, transparent: true});
             text = new Mesh(geometry, material);
             resolve(text);
         }, undefined, reject);

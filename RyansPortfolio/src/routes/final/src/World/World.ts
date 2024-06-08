@@ -8,6 +8,7 @@
   import { createRenderer } from './systems/renderer.ts';
   import { Resizer } from './systems/Resizer.ts';
   import { Loop } from './systems/Loop.js';
+  import { createBloom } from './systems/Bloom.ts';
 
   import { createPaddle } from './components/paddle.ts';
   import { createBorder } from './components/border.ts';
@@ -21,13 +22,13 @@
   let renderer: WebGLRenderer;
   let light: any;
   let loop: any;
+  let loopOn: boolean = false;
   let camControls: any;
-  let sphere: any;
   let paddle1: any;
   let paddle2: any;
   let border: any;
   let ball: any;
-  let text: any;
+  let bloom: any;
   let loadedFont: any;
   let p1Score: any;
   let p2Score: any;
@@ -63,24 +64,29 @@
       ball = createBall();
       paddle1.position.set(-25, 1, 0);
       paddle2.position.set(25, 1, 0);
-      loop = new Loop(camera, scene, renderer, paddle1, paddle2, border, ball);
+      bloom = createBloom(container, scene, camera, renderer, container.clientWidth, container.clientHeight);
+      loop = new Loop(camera, scene, renderer, paddle1, paddle2, border, ball, bloom);
 
       light = createLights();
       let ambLight = createAmbientLight();
       ambLight.position.set(0, 0, 0);
-      const axesHelper = new AxesHelper(8);
 
   
       loop.updatables.push(camControls);
       
-      scene.add(light, ambLight, axesHelper, paddle1, paddle2, border, ball );
+      scene.add(light, ambLight, paddle1, paddle2, border, ball );
       const resizer = new Resizer(container, camera, renderer);
 
       loop.on('scoreChanged', (scores: number[]) => {
         this.updateScore(scores[0], scores[1]);
     });
-    } 
-
+      loop.on('gameOver', () => {
+        var scores = loop.getScores();
+        var winner = scores[0] > scores[1] ? "Player 1" : "Player 2";
+        loop.stop();
+        this.emit('gameOver', winner);
+    });
+  }
     async initScore()
     {
       loadedFont = await LoadFont();
@@ -126,14 +132,20 @@
     }
   
     start() {
+      loopOn = true;
       loop.start();
     }
   
     stop() {
+      loopOn = false;
       loop.stop();
     }
   
     getFrameRate() {
+      if (loopOn === false)
+        {
+          return 0;
+        }
       return loop.getFrameRate();
     }
 
@@ -158,6 +170,16 @@
       if (event.key === ' ') {
         loop.tickBallStart();
       }
+      if (event.key === 'f') {
+        loop.resetBall();
+      }
+  }
+
+  restart()
+  {
+    loop.restart();
+    loop.start();
+    loopOn = true;
   }
 }
   

@@ -7,12 +7,14 @@
     let fps = 0;
     const width = 900;
     const height = 500;
+    let showModal = false;
+    let winner = "";
     let keys = {
         w: false,
         s: false,
-        d: false,
         i: false,
         k: false,
+        f: false,
         " ": false
     }
 
@@ -20,6 +22,10 @@
         world = new World(canvas);
         await world.initScore().then(() =>{
             world.start();
+        });
+        world.on('gameOver', (gameWinner: string) => {
+            winner = gameWinner;
+            showModal = true;
         });
         setInterval(() => {
             fps = world.getFrameRate();
@@ -51,6 +57,12 @@
             keys[event.key as keyof typeof keys] = false;
         }
     }
+    function restartGame() {
+        showModal = false;
+        winner = "";
+        world.restart();
+        canvas.focus();
+    }
 
 </script>
 
@@ -67,6 +79,15 @@
 
 <body id="back-color">
     <h1>Final Assignment</h1>
+        {#if  showModal}
+            <div class="modal">
+                <div class="modal-content">
+                    <button id="close" class="close" on:click={restartGame}>&times;</button>
+                    <h1 id="game-over">Game Over</h1>
+                    <h3 id="game-winner">Winner: {winner}</h3>
+                </div>
+            </div>
+        {/if}
         <div id="scene-container">
             <article id="scene" class="graphics" >
                 <code>FPS: {Math.round(fps)}</code>
@@ -81,13 +102,12 @@
             </article>
         </div>
         <article class="description">
-            <p>The goal of this assignment is to do something cool with shaders.</p>  <p>Requirements are:</p>
-            <ul>
-                <li>Write your own shaders to do something interesting.  Feel free to find some inspiration online, but you'll need to build a big part of it yourself.  Remember to attribute where you got the idea from, if that's what you did.</li>
-                <li>Include interaction of some kind that sends uniforms or attributes to your custom shader.</li>
-                <li>Include more than one object in your scene, but only have your shaders applied to one of those objects.  This will enable you to see how different "materials" (and thus shaders) are used for different objects.</li>
+            <p style="margin-bottom: 0;">This Assignment is the Final for CS 407</p>  <p style="margin-top: 0; margin-bottom: 0;">Controls are:</p>
+            <ul style="margin-top: 0;">
+                <li><strong>Player 1 / Player 2:</strong><br><code>W / I</code> - Up<br><code>S / K</code> - Down</li>
+                <li><code>SpaceBar</code> - Serve Ball</li>
+                <li><code>F</code> - Reset Serve (Ball will sometimes glitch and get stuck)</li>
             </ul>
-            <p>The example/code shown here is for use in class to demonstrate different shader code, not as an example of a finished assignment.  See the file <code>Shader_example.md</code> for example code to try out.</p>
         </article>
 </body>
 
@@ -111,8 +131,51 @@
         width: 80%;
         margin: 20px;
         align-items: center;
+        justify-content: left;
+        text-align: left;
+        font-size: 16px;
+    }
+    .description ul {
+        /* list-style-type: normal; */
+        margin: 1px 1px;
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+        display: flex;
         justify-content: center;
-        text-align: center;
+        align-items: center;
+    }
+    #game-over {
+        color: red;
+        font-size: 100px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    #close {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        font-size: 30px;
+        background-color: rgba(255, 0, 0, 0.569);
+        border: 5px solid rgb(0, 0, 0);
+        border-radius: 15%;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+    }
+
+    #close:hover {
+        background-color: rgba(255, 0, 0, 0.8);
+        cursor: pointer;
+    }
+
+    #game-winner {
+        font-size: 50px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: white;
     }
 
 </style>
